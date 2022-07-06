@@ -1,5 +1,14 @@
 import React, { useEffect, useState} from 'react'
 import axios from 'axios'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+
+//CSS
+import './styles/global.css'
+import './styles/reset.css'
+
+
+//Components
+import { Courses } from './components/Courses';
 
 function App() {
 
@@ -18,11 +27,17 @@ function App() {
   }, [])
 
   return (
-    <div className="container">
-      {data.map( course => (
-        <h1>{course.title}</h1>
-      ))}
-    </div>
+    <Router>
+      <div className="container">
+        {/* {data.map( course => (
+          <h1>{course.title}</h1>
+        ))} */}
+        <Routes>
+          <Route path='/' element={<Courses data={data}/>}/>
+        </Routes>
+      </div>
+    </Router>
+    
   );
 }
 
