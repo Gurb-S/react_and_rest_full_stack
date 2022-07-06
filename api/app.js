@@ -20,9 +20,9 @@ app.use(cors());
   try {
     sequelize.sync();
     await sequelize.authenticate();
-    console.log("IT WORKED!!!!!!!!!")
+    console.log("IT WORKED!!!!!!!!!🎊🎊")
   } catch (error) {
-    console.log('HOUSTON WE GOT A PROBLEM', error);
+    console.log('HOUSTON WE GOT A PROBLEM😿', error);
   }
 })();
 // setup morgan which gives us http request logging
