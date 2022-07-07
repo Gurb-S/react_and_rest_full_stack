@@ -10,13 +10,14 @@ import './styles/global.css'
 //Components
 import { Courses } from './components/Courses';
 import { Header } from './components/Header'
+import { CourseDetail } from './components/CourseDetail'
 
 function App() {
 
   const [ data, setData ] = useState([]);
   //console.log(res.data.courses)
-  const getData = async() =>{
-    const url = 'http://localhost:5000/api/courses';
+  const getData = async(endpoint = "courses") =>{
+    const url = `http://localhost:5000/api/${endpoint}`;
     await axios.get(url)
       .then(res => setData(res.data.courses))
       //.then(res => console.log(res.data.courses))
@@ -31,7 +32,8 @@ function App() {
     <Router>
         <Header />
         <Routes>
-          <Route path='/' element={<Courses data={data}/>}/>
+          <Route path='/' element={<Courses data={data}/>} />
+          <Route path='/courses/:id' element={<CourseDetail whenClicked={getData} data={data}/>} />
         </Routes>
     </Router>
     

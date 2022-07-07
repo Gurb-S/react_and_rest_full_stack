@@ -4,14 +4,19 @@ export function Courses(props){
 
     console.log(props.data)
     console.log(props.data.length)
+    for(let i =0; i < props.data.length; i++){
+        props.data[i].key = i
+    }
+
+    console.log(props.data);
     return(
         <main>
             <div className="wrap main--grid">
                 {
                     props.data.map(course =>(
-                        <a className="course--module course-link" href="course-detail.html">
+                        <a className="course--module course-link" href={`courses/${course.key}`}>
                             <h2 className="course--label">Course</h2>
-                            <h3 className="course--title">{course.title}</h3>
+                            <h3 className="course--title" key={course.key.toString()}>{course.title}</h3>
                         </a>
                     ))
                 }
