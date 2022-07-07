@@ -3,12 +3,13 @@ import axios from 'axios'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 //CSS
-import './styles/global.css'
 import './styles/reset.css'
+import './styles/global.css'
 
 
 //Components
 import { Courses } from './components/Courses';
+import { Header } from './components/Header'
 
 function App() {
 
@@ -28,14 +29,10 @@ function App() {
 
   return (
     <Router>
-      <div className="container">
-        {/* {data.map( course => (
-          <h1>{course.title}</h1>
-        ))} */}
+        <Header />
         <Routes>
           <Route path='/' element={<Courses data={data}/>}/>
         </Routes>
-      </div>
     </Router>
     
   );
