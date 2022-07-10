@@ -17,6 +17,7 @@ function App() {
   const [ data, setData ] = useState([]);
   //console.log(res.data.courses)
   const getData = async(endpoint = "courses") =>{
+    setData([])
     const url = `http://localhost:5000/api/${endpoint}`;
     await axios.get(url)
       .then(res => setData(res.data.courses))
@@ -32,7 +33,8 @@ function App() {
     <Router>
         <Header />
         <Routes>
-          <Route path='/' element={<Courses data={data}/>} />
+          {/* <Route path='/' element={} /> */}
+          <Route path='/courses' element={<Courses data={data}/>} />
           <Route path='/courses/:id' element={<CourseDetail whenClicked={getData} data={data}/>} />
         </Routes>
     </Router>
