@@ -3,7 +3,7 @@ import React from "react";
 export function Courses(props){
 
     console.log(props.data)
-    console.log(props.data.length)
+    // console.log(props.data.length)
     for(let i =0; i < props.data.length; i++){
         props.data[i].key = i
     }

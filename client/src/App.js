@@ -11,6 +11,7 @@ import './styles/global.css'
 import { Courses } from './components/Courses';
 import { Header } from './components/Header'
 import { CourseDetail } from './components/CourseDetail'
+import { Home } from './components/Home'
 
 function App() {
 
@@ -33,7 +34,7 @@ function App() {
     <Router>
         <Header />
         <Routes>
-          {/* <Route path='/' element={} /> */}
+          <Route path='/' element={<Home />} />
           <Route path='/courses' element={<Courses data={data}/>} />
           <Route path='/courses/:id' element={<CourseDetail whenClicked={getData} data={data}/>} />
         </Routes>
