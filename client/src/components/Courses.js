@@ -14,7 +14,7 @@ export function Courses(props){
             <div className="wrap main--grid">
                 {
                     props.data.map(course =>(
-                        <a className="course--module course-link" href={`courses/${course.key + 1}`}>
+                        <a className="course--module course-link" href={`courses/${course.key}`}>
                             <h2 className="course--label">Course</h2>
                             <h3 className="course--title" key={course.key.toString()}>{course.title}</h3>
                         </a>
