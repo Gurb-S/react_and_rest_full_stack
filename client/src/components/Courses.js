@@ -3,12 +3,12 @@ import CourseContext from "../Context";
 
 export function Courses(){
 
-    const { getCourses } = useContext(CourseContext)
+    const { getAllCourses } = useContext(CourseContext)
 
     const [courses, setCourses] = useState([]);
 
     useEffect(() =>{
-        getCourses()
+        getAllCourses()
             .then( res => setCourses(res.courses))
             .catch(err => console.log(err));
     }, [])
