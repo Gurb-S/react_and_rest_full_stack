@@ -22,7 +22,7 @@ export function Courses(){
             <div className="wrap main--grid">
                 {
                     courses.map(course =>(
-                        <a className="course--module course-link" href={`courses/${course.key}`}>
+                        <a className="course--module course-link" href={`courses/${course.courseId}`}>
                             <h2 className="course--label">Course</h2>
                             <h3 className="course--title">{course.title}</h3>
                         </a>
