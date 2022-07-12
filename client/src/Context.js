@@ -1,5 +1,5 @@
 import React from "react";
-import { getCourses } from "./Data";
+import { getAllCourses, getCourse } from "./Data";
 
 
 export const CourseContext = React.createContext();
@@ -7,11 +7,11 @@ export const CourseContext = React.createContext();
 export function CourseProvider({ children }) {
     // const value = {
     //     actions: {
-    //         getCourses: getCourses
+    //         getAllCourses: getAllCourses
     //     }
     // }
     return(
-        <CourseContext.Provider value={{ getCourses }}>
+        <CourseContext.Provider value={{ getAllCourses, getCourse }}>
             {children}
         </CourseContext.Provider>
     )
