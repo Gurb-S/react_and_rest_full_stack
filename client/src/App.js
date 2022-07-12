@@ -2,6 +2,7 @@ import React from 'react'
 //import axios from 'axios'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { CourseProvider } from './Context'
+
 //CSS
 import './styles/reset.css'
 import './styles/global.css'
@@ -10,7 +11,7 @@ import './styles/global.css'
 //Components
 import { Courses } from './components/Courses';
 import { Header } from './components/Header'
-//import { CourseDetail } from './components/CourseDetail'
+import { CourseDetail } from './components/CourseDetail'
 //import { Home } from './components/Home'
 
 function App() {
@@ -38,7 +39,7 @@ function App() {
           <Header />
           <Routes>
             <Route path='/' element={<Courses />} />
-            {/* <Route path='/courses/:id' element={<CourseDetail />} /> */}
+            <Route path='/courses/:id' element={<CourseDetail />} />
           </Routes>
       </Router>
     </CourseProvider>
