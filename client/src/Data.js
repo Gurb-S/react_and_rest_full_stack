@@ -47,7 +47,7 @@
         }
     }
     
-    export const getCourses = async() => {
+    export const getAllCourses = async() => {
         const response = await api('/courses', 'GET');
             if (response.status === 200) {
                 console.log('🎆🎆🎆🎆🎆🎆')
@@ -60,6 +60,19 @@
             }
             else {
                 console.log('🖥🖥🖥🖥🖥🖥🖥🖥🖥')
+                throw new Error();
+            }
+    }
+
+    export const getCourse = async(id) => {
+        const response = await api(`/courses/${id}`, 'GET');
+            if(response.status === 200){
+                return response.json().then(data => data);
+            }
+            else if(response.status === 400){
+                return null;
+            }
+            else {
                 throw new Error();
             }
     }
