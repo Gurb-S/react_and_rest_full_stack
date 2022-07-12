@@ -1,22 +1,30 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import CourseContext from "../Context";
 
-export function Courses(props){
+export function Courses(){
 
-    console.log(props.data)
-    // console.log(props.data.length)
-    for(let i =0; i < props.data.length; i++){
-        props.data[i].key = i
-    }
+    const { getCourses } = useContext(CourseContext)
 
-    console.log(props.data);
+    const [courses, setCourses] = useState([]);
+
+    useEffect(() =>{
+        getCourses()
+            .then( res => setCourses(res.courses))
+            .catch(err => console.log(err));
+    }, [])
+
+    
     return(
+        // <div>
+        //     <h1>LIST OF Courses</h1>
+        // </div>
         <main>
             <div className="wrap main--grid">
                 {
-                    props.data.map(course =>(
+                    courses.map(course =>(
                         <a className="course--module course-link" href={`courses/${course.key}`}>
                             <h2 className="course--label">Course</h2>
-                            <h3 className="course--title" key={course.key.toString()}>{course.title}</h3>
+                            <h3 className="course--title">{course.title}</h3>
                         </a>
                     ))
                 }
