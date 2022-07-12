@@ -48,6 +48,7 @@ router.get('/courses', asyncHandler(async (req,res) => {
         console.log('SUCESSSSS')
         const courses = course.map(course => 
         ({  
+            courseId: course.id,
             title: course.title,
             description: course.description,
             estimatedTime: course.estimatedTime,
