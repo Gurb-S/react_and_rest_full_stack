@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import CourseContext from "../Context";
+import CourseContext from "../context/Context";
 
 export function Courses(){
 

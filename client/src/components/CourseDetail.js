@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
 import { useParams } from "react-router-dom";
-import CourseContext from '../Context';
+import CourseContext from '../context/Context';
 
 /**
  * * The materials needed are currently all on once list element 
