@@ -12,6 +12,7 @@ import './styles/global.css'
 import { Courses } from './components/Courses';
 import { Header } from './components/Header'
 import { CourseDetail } from './components/CourseDetail'
+import { UserSignIn } from './components/UserSignIn'
 //import { Home } from './components/Home'
 
 function App() {
@@ -40,6 +41,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Courses />} />
             <Route path='/courses/:id' element={<CourseDetail />} />
+            <Route path='/signin' element={<UserSignIn />}/>
           </Routes>
       </Router>
     </CourseProvider>
