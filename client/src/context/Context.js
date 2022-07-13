@@ -1,5 +1,6 @@
 import React from "react";
 import { getAllCourses, getCourse } from "./Data";
+import { signInAuth } from "./authHandler";
 
 
 export const CourseContext = React.createContext();
@@ -11,7 +12,7 @@ export function CourseProvider({ children }) {
     //     }
     // }
     return(
-        <CourseContext.Provider value={{ getAllCourses, getCourse }}>
+        <CourseContext.Provider value={{ getAllCourses, getCourse, signInAuth }}>
             {children}
         </CourseContext.Provider>
     )
