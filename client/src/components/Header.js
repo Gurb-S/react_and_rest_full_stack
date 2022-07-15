@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import CourseProvider from "../context/Context";
+import CourseContext from "../context/Context";
 export function Header() {
     
     // // TODO: add link to sign up page
     // TODO: make nav switch to signout and username when logged in
     // * Link for user signout page has already been added
 
-    const { authenticatedUser } = useContext(CourseProvider);
+    const { authenticatedUser } = useContext(CourseContext);
 
     return(
         <header>
@@ -16,7 +16,7 @@ export function Header() {
                 <nav>
                     { authenticatedUser ? (
                         <ul className="header--signedin">
-                            <li>Welcome, {authenticatedUser.firstName} {authenticatedUser.lastName}</li>
+                            <li>Welcome, {authenticatedUser.firstName} {authenticatedUser.lastName}!</li>
                             <li>
                                 <Link to="/signout">Sign Out</Link>
                             </li>
