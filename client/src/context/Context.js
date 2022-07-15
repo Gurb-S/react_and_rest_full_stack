@@ -12,23 +12,35 @@ export function CourseProvider({ children }) {
     //         getAllCourses: getAllCourses
     //     }
     // }
-    const [ authenticatedUser, setAuthenticatedUser ] = useState('');
+
+    const authCookie = Cookies.get('authenticatedUser');
+
+    const [ authenticatedUser, setAuthenticatedUser ] = useState(() =>( authCookie ? JSON.parse(authCookie) : null));
+
 
     const signInAuth = async(username, password) => {
       console.log(username);
       console.log(password);
       const user = await getUser(username,password);
       if(user !== null){
+        console.log(JSON.stringify(user))
         setAuthenticatedUser(user)
         const cookieOptions = {
-          expires: 1 //1 day
+          expires: 1, //1 day
+          secure: true,
+          sameSite: "None"
         };
-        Cookies.set('authenticatedUser', JSON.stringify(user), {cookieOptions})
+        Cookies.set('authenticatedUser', JSON.stringify(user), cookieOptions)
       }
       return user;
     }
+
+    const signOut = async() => {
+      setAuthenticatedUser(null);
+      Cookies.remove('authenticatedUser');
+    }
     return(
-        <CourseContext.Provider value={{ getAllCourses, getCourse, signInAuth, authenticatedUser }}>
+        <CourseContext.Provider value={{ getAllCourses, getCourse, signInAuth, signOut,authenticatedUser }}>
             {children}
         </CourseContext.Provider>
     )
@@ -44,14 +56,14 @@ export default CourseContext;
  * @returns {function} A higher-order component.
  */
 
- export function withContext(Component) {
-    return function ContextComponent(props) {
-      return (
-        <CourseContext>
-          {context => <Component {...props} context={context} />}
-        </CourseContext>
-      );
-    }
-  }
+//  export function withContext(Component) {
+//     return function ContextComponent(props) {
+//       return (
+//         <CourseContext>
+//           {context => <Component {...props} context={context} />}
+//         </CourseContext>
+//       );
+//     }
+//   }
   
   //export default {withContext, Context}
