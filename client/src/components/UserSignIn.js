@@ -32,16 +32,19 @@ export function UserSignIn(){
         signInAuth(emailAddress, password)
             .then((user) => {
                 if(user === null){
-                    setErrors(['Sign-in was unsuccessful'])
+                    console.log('📛📛📛📛');
+                    setErrors(['Sign-in was unsuccessful']);
+                    console.log(errors)
                 }
                 else{
                     console.log(`${user.firstName} was signed in 🎉🎉`);
+                    navigate('/')
                 }
             })
             .catch((err) => {
                 console.error(err)
             })
-        //e.currentTarget.reset();
+        e.currentTarget.reset();
     }
 
     const cancelHandler = (e) =>{
@@ -52,7 +55,9 @@ export function UserSignIn(){
         <main>
             <div className="form--centered">
                 <h2>Sign in</h2>
+                { errors.length > 0 ? <h3 className="validation--errors">{errors}</h3> : <></>}
                 <form onSubmit={handleSubmit}>
+                    <label></label>
                     <input id="emailAddress" name="emailAddress" type="email" ref={emailRef} required></input>
                     <input id="password" name="password" type="password" ref={passwordRef} required></input>
                     <button className="button" type="submit">Sign In</button>
