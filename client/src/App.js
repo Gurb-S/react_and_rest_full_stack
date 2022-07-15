@@ -14,6 +14,7 @@ import { Header } from './components/Header'
 import { CourseDetail } from './components/CourseDetail'
 import { UserSignIn } from './components/UserSignIn'
 import { UserSignOut } from './components/UserSignOut'
+import { PrivateRoute } from './context/PrivateRoute'
 //import { Home } from './components/Home'
 
 function App() {
@@ -41,7 +42,7 @@ function App() {
           <Header />
           <Routes>
             <Route path='/' element={<Courses />} />
-            <Route path='/courses/:id' element={<CourseDetail />} />
+            <Route path='/courses/:id' element={<PrivateRoute><CourseDetail /></PrivateRoute>} />
             <Route path='/signin' element={<UserSignIn />}/>
             <Route path='/signout' element={<UserSignOut />} />
           </Routes>
