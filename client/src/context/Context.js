@@ -15,7 +15,7 @@ export function CourseProvider({ children }) {
 
     const authCookie = Cookies.get('authenticatedUser');
 
-    const [ authenticatedUser, setAuthenticatedUser ] = useState(() =>( authCookie ? JSON.parse(authCookie) : null));
+    const [ authenticatedUser, setAuthenticatedUser ] = useState(() => ( authCookie ? JSON.parse(authCookie) : null));
 
 
     const signInAuth = async(username, password) => {
