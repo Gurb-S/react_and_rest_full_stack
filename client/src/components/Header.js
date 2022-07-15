@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import CourseContext from "../context/Context";
+
 export function Header() {
     
     // // TODO: add link to sign up page
-    // TODO: make nav switch to signout and username when logged in
+    // // TODO: make nav switch to signout and username when logged in
     // * Link for user signout page has already been added
 
     const { authenticatedUser } = useContext(CourseContext);
