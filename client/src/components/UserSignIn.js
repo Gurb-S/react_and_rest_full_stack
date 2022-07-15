@@ -5,7 +5,7 @@ import CourseContext from "../context/Context";
 export function UserSignIn(){
 
     // // TODO: submitting form needs to send info to api
-    // TODO: change header value based on user
+    // // TODO: change header value based on user
     // TODO: send user to authenticated route 
     // TODO: display errors when signin invalid
     // TODO: remove comments that prevents from form field from resetting
@@ -15,8 +15,6 @@ export function UserSignIn(){
     const { signInAuth } = useContext(CourseContext);
 
     // states
-    // const [email, setEmail] = useState('');
-    // const [password, setPassword] = useState('');
     const [errors, setErrors] = useState([]);
 
     // imported react elements
@@ -30,11 +28,7 @@ export function UserSignIn(){
         e.preventDefault();
         const emailAddress = emailRef.current.value;
         const password = passwordRef.current.value;
-        //console.log(emailRef.current.value);
-        // setEmail(emailRef.current.value)
-        // //console.log(passwordRef.current.value)
-        // setPassword(passwordRef.current.value)
-        // console.log(email, password)
+
         signInAuth(emailAddress, password)
             .then((user) => {
                 if(user === null){
@@ -55,10 +49,6 @@ export function UserSignIn(){
     }
 
     return(
-        // <div>
-        //     <h1>Sign in Page</h1>
-        //     <h2>This is the page doug</h2>
-        // </div>
         <main>
             <div className="form--centered">
                 <h2>Sign in</h2>
