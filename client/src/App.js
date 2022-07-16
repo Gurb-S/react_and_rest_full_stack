@@ -1,7 +1,9 @@
 import React from 'react'
 //import axios from 'axios'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import { CourseProvider } from './context/Context'
+import { CourseProvider } from './context/Context';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 //CSS
 import './styles/reset.css'
@@ -18,7 +20,6 @@ import { PrivateRoute } from './context/PrivateRoute'
 //import { Home } from './components/Home'
 
 function App() {
-
   // const [ data, setData ] = useState([]);
   // //console.log(res.data.courses)
   // const getData = async(endpoint = "courses") =>{
@@ -35,19 +36,20 @@ function App() {
   // useEffect(() =>{
   //   getData();
   // }, [])
+  
 
   return (
-    <CourseProvider>
-      <Router>
+      <CourseProvider>
+        <Router>
           <Header />
           <Routes>
             <Route path='/' element={<Courses />} />
             <Route path='/courses/:id' element={<PrivateRoute><CourseDetail /></PrivateRoute>} />
-            <Route path='/signin' element={<UserSignIn />}/>
+            <Route path='/signin' element={<UserSignIn />} />
             <Route path='/signout' element={<UserSignOut />} />
           </Routes>
-      </Router>
-    </CourseProvider>
+        </Router>
+      </CourseProvider>
   );
 }
 
