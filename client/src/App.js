@@ -17,6 +17,7 @@ import { CourseDetail } from './components/CourseDetail'
 import { UserSignIn } from './components/UserSignIn'
 import { UserSignOut } from './components/UserSignOut'
 import { PrivateRoute } from './context/PrivateRoute'
+import { UpdateCourse } from './components/UpdateCourse';
 //import { Home } from './components/Home'
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
           <Routes>
             <Route path='/' element={<Courses />} />
             <Route path='/courses/:id' element={<PrivateRoute><CourseDetail /></PrivateRoute>} />
+            <Route path='/courses/:id/update' element={<PrivateRoute><UpdateCourse /></PrivateRoute>} />
             <Route path='/signin' element={<UserSignIn />} />
             <Route path='/signout' element={<UserSignOut />} />
           </Routes>
