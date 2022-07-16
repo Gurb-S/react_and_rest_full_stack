@@ -3,8 +3,7 @@ import CourseContext from "../context/Context";
 
 export function Courses(){
 
-    const { getAllCourses } = useContext(CourseContext)
-
+    const { getAllCourses } = useContext(CourseContext);
     const [courses, setCourses] = useState([]);
 
     useEffect(() =>{
@@ -13,11 +12,7 @@ export function Courses(){
             .catch(err => console.log(err));
     }, [])
 
-    
     return(
-        // <div>
-        //     <h1>LIST OF Courses</h1>
-        // </div>
         <main>
             <div className="wrap main--grid">
                 {
