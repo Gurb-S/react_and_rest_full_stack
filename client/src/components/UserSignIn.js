@@ -40,7 +40,7 @@ export function UserSignIn(){
             .then((user) => {
                 if(user === null){
                     console.log('📛📛📛📛');
-                    setErrors(['Sign-in was unsuccessful']);
+                    setErrors(["Username or password is incorrect"]);
                     console.log(errors);
                     signInNotify = toast.error('Sign-in was unsuccessful');
                 }
@@ -66,8 +66,9 @@ export function UserSignIn(){
                 <h2>Sign in</h2>
                 { errors.length > 0 ? <h3 className="validation--errors">{errors}</h3> : <></>}
                 <form onSubmit={handleSubmit}>
-                    <label></label>
+                    <label htmlFor="emailAddress">Email Address</label>
                     <input id="emailAddress" name="emailAddress" type="email" ref={emailRef} required></input>
+                    <label htmlFor="password">Password</label>
                     <input id="password" name="password" type="password" ref={passwordRef} required></input>
                     <button className="button" type="submit" onClick={notify}>Sign In</button>
                     <button className="button button-secondary" onClick={cancelHandler}>Cancel</button>
