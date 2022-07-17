@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Cookies from "js-cookie";
-import { getAllCourses, getCourse, getUser } from "./Data";
-//import { signInAuth } from "./authHandler";
+import { getAllCourses, getCourse, getUser, UpdateCourse } from "./Data";
 
 
 export const CourseContext = React.createContext();
@@ -40,7 +39,7 @@ export function CourseProvider({ children }) {
       Cookies.remove('authenticatedUser');
     }
     return(
-        <CourseContext.Provider value={{ getAllCourses, getCourse, signInAuth, signOut,authenticatedUser }}>
+        <CourseContext.Provider value={{ getAllCourses, getCourse, signInAuth, signOut, UpdateCourse, authenticatedUser }}>
             {children}
         </CourseContext.Provider>
     )
