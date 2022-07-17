@@ -77,3 +77,17 @@
             }
     }
 
+    export const UpdateCourse = async(id,data, username, password) => {
+        const response = await api(`/courses/${id}`, 'PUT', data, true, {username, password});
+            if(response.status === 204){
+                return 'item added';
+            }
+            else if(response.status === 403){
+                return 'you are not the owner';
+            }
+            else{
+                console.log('Did not worklllllllll')
+                throw new Error();
+            }
+    }
+
