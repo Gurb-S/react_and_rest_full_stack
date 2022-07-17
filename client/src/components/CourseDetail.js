@@ -4,9 +4,9 @@ import CourseContext from '../context/Context';
 import ReactMarkdown from 'react-markdown';
 
 /**
- * * The materials needed are currently all on once list element 
+ * // * The materials needed are currently all on once list element 
  * // TODO: display materials needed as individual items
- * TODO: remove extra console logs and remove extra comments
+ * // TODO: remove extra console logs and remove extra comments
  */
 
 export function CourseDetail(){
@@ -17,21 +17,11 @@ export function CourseDetail(){
 
     useEffect(() => {
         getCourse(id)
-            //.then(res => console.log(res.course))
             .then(res => setCourse(res.course))
             .catch(err => console.log(err));
-        // const itemsNeeded = course.materialsNeeded.split('\n');
-        // const items = itemsNeeded.map( item => <li>{item}</li>)
-        // console.log(itemsNeeded)
     }, [])
 
-    //course.materialsNeeded.length - 1
-    
     return(
-        // <div>
-        //     <h2>This is the page for courses/{id}</h2>
-        //     <h3>yoyo</h3>
-        // </div>
         <main>
             <div className="actions--bar">
                 <div className="wrap">
