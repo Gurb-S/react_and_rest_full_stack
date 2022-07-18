@@ -9,8 +9,7 @@ export function UpdateCourse () {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    const { getCourse } = useContext(CourseContext);
-    const { UpdateCourse } = useContext(CourseContext);
+    const { getCourse, UpdateCourse, userEmail, userPassword  } = useContext(CourseContext);
     //const [ course, setCourse ] = useState([]);
 
     const [ title, setTitle ] = useState('');
@@ -42,7 +41,8 @@ export function UpdateCourse () {
         console.log('you tried!')
         console.log(data);
         // TODO: pass in user auth data
-        UpdateCourse(id,data, 'joe@smith.com','joepassword');
+        // console.log(userEmail, userPassword)
+        // UpdateCourse(id,data, userEmail, userPassword);
     }
 
     const cancelHandler = () =>{

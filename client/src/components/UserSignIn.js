@@ -35,7 +35,6 @@ export function UserSignIn(){
         e.preventDefault();
         const emailAddress = emailRef.current.value;
         const password = passwordRef.current.value;
-
         signInAuth(emailAddress, password)
             .then((user) => {
                 if(user === null){
