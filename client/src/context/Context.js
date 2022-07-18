@@ -18,26 +18,26 @@ export function CourseProvider({ children }) {
     const [ authenticatedUser, setAuthenticatedUser ] = useState(() => ( authCookie ? JSON.parse(authCookie) : null));
 
     // User Credentials
-    const [ userEmail, setUserEmail ] = useState('Test 1');
-    const [ userPassword, setUserPassword ] = useState('');
-
+    const [ test, setTest ] = useState('');
+    
 
     const signInAuth = async(username, password) => {
       console.log(username);
       console.log(password);
+      setTest('Please print to the screen')
+      console.log(test);
       const user = await getUser(username,password);
       if(user !== null){
-        setUserEmail('some email');
-        setUserPassword('some password');
         console.log(JSON.stringify(user))
         setAuthenticatedUser(user)
+       
         const cookieOptions = {
           expires: 1, //1 day
-          secure: true,
+          secure: true,  
           sameSite: "None"
         };
         Cookies.set('authenticatedUser', JSON.stringify(user), cookieOptions);
-        console.log(userEmail, userPassword)
+        
       }
       return user;
     }
@@ -49,7 +49,7 @@ export function CourseProvider({ children }) {
 
 
     return(
-        <CourseContext.Provider value={{ getAllCourses, getCourse, signInAuth, signOut, UpdateCourse,authenticatedUser, userEmail, userPassword }}>
+        <CourseContext.Provider value={{ getAllCourses, getCourse, signInAuth, signOut, UpdateCourse,authenticatedUser }}>
             {children}
         </CourseContext.Provider>
     )
