@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Cookies from "js-cookie";
 import { getAllCourses, getCourse, getUser, UpdateCourse } from "./Data";
+//import { signInAuth } from "./authHandler";
 
 
 export const CourseContext = React.createContext();
@@ -16,12 +17,18 @@ export function CourseProvider({ children }) {
 
     const [ authenticatedUser, setAuthenticatedUser ] = useState(() => ( authCookie ? JSON.parse(authCookie) : null));
 
+    // User Credentials
+    const [ userEmail, setUserEmail ] = useState('Test 1');
+    const [ userPassword, setUserPassword ] = useState('');
+
 
     const signInAuth = async(username, password) => {
       console.log(username);
       console.log(password);
       const user = await getUser(username,password);
       if(user !== null){
+        setUserEmail('some email');
+        setUserPassword('some password');
         console.log(JSON.stringify(user))
         setAuthenticatedUser(user)
         const cookieOptions = {
@@ -29,7 +36,8 @@ export function CourseProvider({ children }) {
           secure: true,
           sameSite: "None"
         };
-        Cookies.set('authenticatedUser', JSON.stringify(user), cookieOptions)
+        Cookies.set('authenticatedUser', JSON.stringify(user), cookieOptions);
+        console.log(userEmail, userPassword)
       }
       return user;
     }
@@ -38,8 +46,10 @@ export function CourseProvider({ children }) {
       setAuthenticatedUser(null);
       Cookies.remove('authenticatedUser');
     }
+
+
     return(
-        <CourseContext.Provider value={{ getAllCourses, getCourse, signInAuth, signOut, UpdateCourse, authenticatedUser }}>
+        <CourseContext.Provider value={{ getAllCourses, getCourse, signInAuth, signOut, UpdateCourse,authenticatedUser, userEmail, userPassword }}>
             {children}
         </CourseContext.Provider>
     )
