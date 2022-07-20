@@ -24,7 +24,7 @@ export function Header() {
                         </ul>
                     ) :(
                         <ul className="header--signedout">
-                            <li><a href="sign-up.html">Sign Up</a></li>
+                            <li><a href="/signup">Sign Up</a></li>
                             <li><a href="/signin">Sign In</a></li>
                         </ul>
                     )}
