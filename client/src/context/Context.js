@@ -1,7 +1,6 @@
 import React, {  useState } from "react";
 import Cookies from "js-cookie";
-import { getAllCourses, getCourse, getUser, UpdateCourse } from "./Data";
-//import { signInAuth } from "./authHandler";
+import { getAllCourses, getCourse, getUser, UpdateCourse, createUser } from "./Data";
 
 
 export const CourseContext = React.createContext();
@@ -45,7 +44,7 @@ export function CourseProvider({ children }) {
 
 
     return(
-        <CourseContext.Provider value={{ getAllCourses, getCourse, signInAuth, signOut, UpdateCourse,authenticatedUser }}>
+        <CourseContext.Provider value={{ getAllCourses, getCourse, signInAuth, signOut, UpdateCourse, authenticatedUser, createUser }}>
             {children}
         </CourseContext.Provider>
     )
