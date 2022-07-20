@@ -20,10 +20,7 @@ export function UpdateCourse () {
     
     
     // Notification for signing in
-    let updateNotify;
-    const notify = () => {
-        return updateNotify;
-    };
+
 
     useEffect(() => {
         getCourse(id)
@@ -51,10 +48,10 @@ export function UpdateCourse () {
         // TODO: pass in user auth data
         // console.log(userEmail, userPassword)
         UpdateCourse(id,data,'joe@smith.com', 'joepassword')
-            .then(() => updateNotify = toast.success('Course has been updated'))
+            .then(() => toast.success('Course has been updated'))
             .catch(err =>{
                 console.error(err)
-                updateNotify = toast.error('Course could not be updated')
+                toast.error('Course could not be updated')
             })
     }
 
