@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {  useState } from "react";
 import Cookies from "js-cookie";
 import { getAllCourses, getCourse, getUser, UpdateCourse } from "./Data";
 //import { signInAuth } from "./authHandler";
@@ -18,26 +18,22 @@ export function CourseProvider({ children }) {
     const [ authenticatedUser, setAuthenticatedUser ] = useState(() => ( authCookie ? JSON.parse(authCookie) : null));
 
     // User Credentials
-    const [ test, setTest ] = useState('');
     
+
 
     const signInAuth = async(username, password) => {
       console.log(username);
       console.log(password);
-      setTest('Please print to the screen')
-      console.log(test);
       const user = await getUser(username,password);
       if(user !== null){
         console.log(JSON.stringify(user))
         setAuthenticatedUser(user)
-       
         const cookieOptions = {
           expires: 1, //1 day
           secure: true,  
           sameSite: "None"
         };
         Cookies.set('authenticatedUser', JSON.stringify(user), cookieOptions);
-        
       }
       return user;
     }
