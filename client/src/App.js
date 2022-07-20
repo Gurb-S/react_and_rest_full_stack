@@ -16,6 +16,7 @@ import { UserSignIn } from './components/UserSignIn';
 import { UserSignOut } from './components/UserSignOut';
 import { PrivateRoute } from './context/PrivateRoute';
 import { UpdateCourse } from './components/UpdateCourse';
+import { UserSignUp } from './components/UserSignUp';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path='/courses/:id/update' element={<PrivateRoute><UpdateCourse /></PrivateRoute>} />
             <Route path='/signin' element={<UserSignIn />} />
             <Route path='/signout' element={<UserSignOut />} />
+            <Route path='/signup' element={<UserSignUp />}/>
           </Routes>
         </Router>
       </CourseProvider>
