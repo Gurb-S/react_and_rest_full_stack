@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import CourseContext from "../context/Context";
 import { useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
 
 
 export function UpdateCourse () {
@@ -9,13 +10,20 @@ export function UpdateCourse () {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    const { getCourse, UpdateCourse, userEmail, userPassword  } = useContext(CourseContext);
+    const { getCourse, UpdateCourse } = useContext(CourseContext);
     //const [ course, setCourse ] = useState([]);
 
     const [ title, setTitle ] = useState('');
     const [ description, setDescription ] = useState('');
     const [ estimatedTime, setEstimatedTime ] = useState('');
-    const [ materialsNeeded, setMaterialsNeeded ] = useState('')
+    const [ materialsNeeded, setMaterialsNeeded ] = useState('');
+    
+    
+    // Notification for signing in
+    let updateNotify;
+    const notify = () => {
+        return updateNotify;
+    };
 
     useEffect(() => {
         getCourse(id)
@@ -42,7 +50,12 @@ export function UpdateCourse () {
         console.log(data);
         // TODO: pass in user auth data
         // console.log(userEmail, userPassword)
-        // UpdateCourse(id,data, userEmail, userPassword);
+        UpdateCourse(id,data,'joe@smith.com', 'joepassword')
+            .then(() => updateNotify = toast.success('Course has been updated'))
+            .catch(err =>{
+                console.error(err)
+                updateNotify = toast.error('Course could not be updated')
+            })
     }
 
     const cancelHandler = () =>{
@@ -75,6 +88,7 @@ export function UpdateCourse () {
                     <button className="button button-secondary" onClick={cancelHandler}>Cancel</button>
                 </form>
             </div>
+            <ToastContainer />
         </main>
     )
 }
