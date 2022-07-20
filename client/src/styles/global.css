@@ -133,7 +133,9 @@ header nav a:hover {
     line-height: 1.25;
 }
 .validation--errors li {
-    margin-bottom: .5rem;
+    color: #800;
+    margin-bottom: 0rem;
+    padding: .5rem;
 }
 .validation--errors li:last-child {
     margin-bottom: 0;
