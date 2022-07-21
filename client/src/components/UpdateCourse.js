@@ -7,17 +7,19 @@ import { toast, ToastContainer } from 'react-toastify';
 
 export function UpdateCourse () {
 
+    // TODO: update name with name of owner
+
     const { id } = useParams();
     const navigate = useNavigate();
 
-    const { getCourse, UpdateCourse } = useContext(CourseContext);
+    const { getCourse, updateCourse } = useContext(CourseContext);
     //const [ course, setCourse ] = useState([]);
 
     const [ title, setTitle ] = useState('');
     const [ description, setDescription ] = useState('');
     const [ estimatedTime, setEstimatedTime ] = useState('');
     const [ materialsNeeded, setMaterialsNeeded ] = useState('');
-    
+    const [ errors, setErrors ] = useState('');    
     
     // Notification for signing in
 
@@ -46,9 +48,19 @@ export function UpdateCourse () {
         console.log('you tried!')
         console.log(data);
         // TODO: pass in user auth data
+        // TODO: provide error handling for missing info
         // console.log(userEmail, userPassword)
-        UpdateCourse(id,data,'joe@smith.com', 'joepassword')
-            .then(() => toast.success('Course has been updated'))
+        updateCourse(id,data,'joe@smith.com', 'joepassword')
+            .then(res => {
+                console.log(res)
+                // if(res.message){
+                //     setErrors(res.message);
+                //     toast.error('Course could not be updated')
+                // }
+                // else if(!res.message){
+                //     toast.success('Course has been updated')
+                // }
+            })
             .catch(err =>{
                 console.error(err)
                 toast.error('Course could not be updated')
