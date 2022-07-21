@@ -5,8 +5,8 @@ import CourseContext from "../context/Context";
 export function DeleteCourse() {
     const { deleteCourse } = useContext(CourseContext);
     //const { id } = useParams();
-
-    deleteCourse(5,'joe@smith.com', 'joepassword');
+    // TODO: update id based on course that linked here
+    deleteCourse(6,'joe@smith.com', 'joepassword');
 
     return(
         <Navigate to='/' />

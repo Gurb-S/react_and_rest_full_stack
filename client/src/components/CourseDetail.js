@@ -7,6 +7,8 @@ import ReactMarkdown from 'react-markdown';
  * // * The materials needed are currently all on once list element 
  * // TODO: display materials needed as individual items
  * // TODO: remove extra console logs and remove extra comments
+ * TODO: update name with name of owner
+ * TODO: only allow access to update and delete if owner of course
  */
 
 export function CourseDetail(){
@@ -26,7 +28,7 @@ export function CourseDetail(){
             <div className="actions--bar">
                 <div className="wrap">
                     <a className="button" href={`/courses/${id}/update`}>Update Course</a>
-                    <a className="button" href='/'>Delete Course</a>
+                    <a className="button" href={`/courses/${id}/delete`}>Delete Course</a>
                     <a className="button button-secondary" href="/">Return to List</a>
                 </div>
             </div>
