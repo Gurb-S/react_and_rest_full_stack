@@ -7,7 +7,7 @@ import { toast, ToastContainer } from "react-toastify";
 export function CreateCourse() {
     // TODO: update name with name of person creating course
     // TODO: provide userid of user logined
-    
+
     const { authenticatedUser, createCourse } = useContext(CourseContext);
 
     const navigate = useNavigate();
@@ -17,6 +17,7 @@ export function CreateCourse() {
     const [ description, setDescription ] = useState('');
     const [ estimatedTime, setEstimatedTime ] = useState('');
     const [ materialsNeeded, setMaterialsNeeded ] = useState('');
+    const [ errors, setErrors ] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -27,8 +28,19 @@ export function CreateCourse() {
             materialsNeeded,
             userId: 1
         }
+        // TODO: add auth for of user logged
         createCourse(data, 'joe@smith.com', 'joepassword')
-            .then(() => toast.success('Course has been updated'))
+            .then(res => { 
+                console.log(res.errors)
+                setErrors(res.errors)
+                if(errors.length > 0){
+                    toast.error('Course could not be created');
+                }
+                else if(errors.length === 0){
+                    toast.success('Course was successfully created');
+                    navigate('/')
+                }
+            })
             .catch(err =>{
                 console.error(err)
                 toast.error('Course could not be updated')
@@ -44,6 +56,13 @@ export function CreateCourse() {
         <main>
             <div className="wrap">
                 <h2>Create Course</h2>
+                { errors.length > 0 ?(
+                    <div className="validation--errors">
+                        <ul>
+                            {errors.map(err => <li>{err}</li>)}
+                        </ul>
+                    </div>
+                ) : <></>}
                 <form onSubmit={handleSubmit}>
                     <div className="main--flex">
                         <div>
