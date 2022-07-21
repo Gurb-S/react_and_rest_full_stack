@@ -77,17 +77,43 @@
             }
     }
 
-    export const UpdateCourse = async(id,data, username, password) => {
+    export const createCourse = async(data,username, password) => {
+        const response = await api(`/courses`, 'POST', data, true, {username, password});
+        if(response.status === 201){
+            return null;
+        }
+        else if(response.status === 400){
+            return response.json().then( data => data)
+        }
+        else{
+            throw new Error();
+        }
+    }
+
+    export const updateCourse = async(id,data, username, password) => {
         const response = await api(`/courses/${id}`, 'PUT', data, true, {username, password});
             if(response.status === 204){
                 return 'item added';
             }
             else if(response.status === 403){
-                return 'you are not the owner';
+                return response.json().then( data => data)
             }
-            else{
+            else if(response.status === 400){
+                return response.json().then( data => data)
+            }
+            else {
                 console.log('Did not worklllllllll')
                 throw new Error();
             }
+    }
+
+    export const deleteCourse = async(id, username, password) => {
+        const response = await api(`/courses/${id}`, 'DELETE', null, true, { username, password });
+        if(response.status === 204){
+            return null;
+        }
+        else{
+            throw new Error();
+        }
     }
 
