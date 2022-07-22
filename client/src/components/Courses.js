@@ -14,6 +14,7 @@ export function Courses(){
 
     return(
         <main>
+            <p>{locations.prevPath}</p>
             <div className="wrap main--grid">
                 {
                     courses.map(course =>(

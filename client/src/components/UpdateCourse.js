@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import CourseContext from "../context/Context";
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
@@ -11,8 +11,11 @@ export function UpdateCourse () {
 
     const { id } = useParams();
     const navigate = useNavigate();
+    const location = useLocation();
+    console.log(location);
+    console.log(navigate);
 
-    const { getCourse, updateCourse } = useContext(CourseContext);
+    const { getCourse, updateCourse, authenticatedUser } = useContext(CourseContext);
     //const [ course, setCourse ] = useState([]);
 
     const [ title, setTitle ] = useState('');
@@ -20,18 +23,26 @@ export function UpdateCourse () {
     const [ estimatedTime, setEstimatedTime ] = useState('');
     const [ materialsNeeded, setMaterialsNeeded ] = useState('');
     const [ errors, setErrors ] = useState('');    
+    const [ owner, setOwner ] = useState('');
     
     // Notification for signing in
 
 
+
+
     useEffect(() => {
+        const loginedIn = authenticatedUser.firstName + ' ' + authenticatedUser.lastName;
         getCourse(id)
-            //.then(res => setCourse(res.course))
             .then(res => {
                 setTitle(res.course.title);
                 setDescription(res.course.description);
                 setEstimatedTime(res.course.estimatedTime);
                 setMaterialsNeeded(res.course.materialsNeeded);
+                setOwner(res.owner.firstName + ' ' + res.owner.lastName);
+                console.log(loginedIn);
+                if(loginedIn !== res.owner.firstName + ' ' + res.owner.lastName){
+                    navigate(`/courses/${id}`)
+                }
             })
             .catch(err => console.log(err));
     }, [])
@@ -80,7 +91,7 @@ export function UpdateCourse () {
                         <div>
                             <label htmlFor="courseTitle"></label>
                             <input id="courseTitle" name="courseTitle" type="text" value={title} onChange={(e) =>{ setTitle(e.target.value) }}></input>
-                            <p>By Joe Smith</p>
+                            <p>By {owner}</p>
                             <label htmlFor="courseDescription">Course Description</label>
                             <textarea id="courseDescription" name="courseDescription" value={description} onChange={(e) =>{ setDescription(e.target.value) }}>
                             </textarea>

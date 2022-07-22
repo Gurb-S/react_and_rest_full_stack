@@ -29,6 +29,7 @@ export function CreateCourse() {
             userId: 1
         }
         // TODO: add auth for of user logged
+        // TODO: error shows even when course created successfully
         createCourse(data, 'joe@smith.com', 'joepassword')
             .then(res => { 
                 console.log(res.errors)

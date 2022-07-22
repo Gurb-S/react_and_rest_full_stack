@@ -17,7 +17,6 @@ export function CourseProvider({ children }) {
     const [ authenticatedUser, setAuthenticatedUser ] = useState(() => ( authCookie ? JSON.parse(authCookie) : null));
 
     // User Credentials
-    
 
 
     const signInAuth = async(username, password) => {
