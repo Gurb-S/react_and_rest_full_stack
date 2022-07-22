@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
-import { useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import CourseContext from '../context/Context';
 import ReactMarkdown from 'react-markdown';
 
@@ -12,16 +12,24 @@ import ReactMarkdown from 'react-markdown';
  */
 
 export function CourseDetail(){
+
     const { id } = useParams();
     const { getCourse } = useContext(CourseContext);
 
     const [ course, setCourse ] = useState([]);
+    const [ owner, setOwner ] = useState('');
+    
 
     useEffect(() => {
         getCourse(id)
-            .then(res => setCourse(res.course))
+            .then(res => { 
+                setCourse(res.course)
+                setOwner(res.owner.firstName + ' ' + res.owner.lastName);
+            })
             .catch(err => console.log(err));
     }, [])
+
+    //toast.error('You are not the owner of this course')
 
     return(
         <main>
@@ -39,7 +47,7 @@ export function CourseDetail(){
                         <div>
                             <h3 className="course--detail--title">Course</h3>
                             <h4 className="course--name">{course.title}</h4>
-                            <p>Billy Bob</p>
+                            <p>{owner}</p>
                             <p>{course.description}</p>
                         </div>
                         <div>
@@ -47,9 +55,9 @@ export function CourseDetail(){
                             {course.estimatedTime ?(<p>{course.estimatedTime}</p>) : <ReactMarkdown>*No time was provided by owner*</ReactMarkdown> }
                             <h3 className="course--detail--title">Materials Needed</h3>
                             {course.materialsNeeded ? (
-                                <ul className="course--detail--list">
-                                    <ReactMarkdown>{course.materialsNeeded}</ReactMarkdown>
-                                </ul>
+                            <ul className="course--detail--list">
+                                <ReactMarkdown>{course.materialsNeeded}</ReactMarkdown>
+                            </ul>
                             ) : <ReactMarkdown>*No materials needed was provided by owner*</ReactMarkdown>}
                         </div>
                     </div>
