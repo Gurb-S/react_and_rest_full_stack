@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import CourseContext from "../context/Context";
 import { toast, ToastContainer } from 'react-toastify';
 
@@ -9,28 +9,33 @@ export function UserSignIn(){
     // // TODO: change header value based on user
     // // TODO: send user to authenticated route 
     // // TODO: display errors when signin invalid
-    // TODO: redirect user to home or private route that sent them here
-    // TODO: fix toast issue with sign in successful not showing
-    // TODO: remove comments that prevents from form field from resetting
+    // // TODO: redirect user to home or private route that sent them here
+    // // TODO: fix toast issue with sign in successful not showing
+    // // TODO: remove comments that prevents from form field from resetting
     // TODO: remove excess comments
 
     //context Api
     const { signInAuth } = useContext(CourseContext);
 
+    //import from router dom
+    const navigate = useNavigate();
+    const location = useLocation();
+
     // states
     const [errors, setErrors] = useState([]);
 
-    // imported react elements
+    // save values for inputs
     const emailRef = useRef();
     const passwordRef = useRef();
-    const navigate = useNavigate();
+
+    //Notifcation
     let signInNotify;
     const notify = () => {
-        console.log(errors.length)
         return signInNotify;
     };
 
-    // Form functions
+
+    // hanles the user login 
     const handleSubmit = (e) =>{
         e.preventDefault();
         const emailAddress = emailRef.current.value;
@@ -38,15 +43,17 @@ export function UserSignIn(){
         signInAuth(emailAddress, password)
             .then((user) => {
                 if(user === null){
-                    console.log('📛📛📛📛');
                     setErrors(["Username or password is incorrect"]);
-                    console.log(errors);
                     signInNotify = toast.error('Sign-in was unsuccessful');
                 }
                 else{
                     signInNotify = toast.success('Sign-in was successful')
-                    console.log(`${user.firstName} was signed in 🎉🎉`);
-                    navigate('/');
+                    if(location.state?.from){
+                        navigate(location.state.from)
+                    }
+                    else{
+                        navigate('/')
+                    }
                 }
             })
             .catch((err) => {

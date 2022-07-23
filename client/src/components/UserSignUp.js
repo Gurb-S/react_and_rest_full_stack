@@ -6,7 +6,10 @@ import CourseContext from "../context/Context";
 
 export function UserSignUp () {
 
+    //import from router dom
     const navigate = useNavigate();
+
+    //import from context api
     const { createUser, signInAuth } = useContext(CourseContext);
 
     //state hooks
@@ -16,7 +19,7 @@ export function UserSignUp () {
     const [ password, setPassword ] = useState('');
     const [ errors, setErrors ] = useState('');
 
-
+    //handles creating a new user
     const handleSubmit = (e) => {
         e.preventDefault();
         const user = {
@@ -25,12 +28,9 @@ export function UserSignUp () {
             emailAddress,
             password
         }
-        console.log(user);
         createUser(user)
             .then((res) => {
                 setErrors(res);
-                console.log(res)
-                console.log(errors.length)
                 if(errors.length > 0){
                     toast.error('Acount could not be created')
                 }

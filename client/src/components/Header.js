@@ -4,10 +4,7 @@ import CourseContext from "../context/Context";
 
 export function Header() {
     
-    // // TODO: add link to sign up page
-    // // TODO: make nav switch to signout and username when logged in
-    // * Link for user signout page has already been added
-
+    //import from context api
     const { authenticatedUser } = useContext(CourseContext);
 
     return(
