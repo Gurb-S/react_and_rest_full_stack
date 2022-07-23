@@ -104,6 +104,9 @@
         if(response.status === 204){
             return null;
         }
+        else if(response.status === 403){
+            return response.status;
+        }
         else{
             throw new Error();
         }
