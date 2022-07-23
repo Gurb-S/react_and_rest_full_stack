@@ -1,14 +1,20 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import CourseContext from "../context/Context";
 
 export function Courses(){
 
+    //import from context api
     const { getAllCourses } = useContext(CourseContext);
+
+    //states
     const [courses, setCourses] = useState([]);
 
     useEffect(() =>{
         getAllCourses()
-            .then( res => setCourses(res.courses))
+            .then( res => {
+                setCourses(res.courses)
+            })
             .catch(err => console.log(err));
     }, [])
 
@@ -17,10 +23,10 @@ export function Courses(){
             <div className="wrap main--grid">
                 {
                     courses.map(course =>(
-                        <a className="course--module course-link" href={`courses/${course.courseId}`}>
+                        <Link className="course--module course-link" to={`courses/${course.courseId}`} key={course.courseId}>
                             <h2 className="course--label">Course</h2>
                             <h3 className="course--title">{course.title}</h3>
-                        </a>
+                        </Link>
                     ))
                 }
                 <a className="course--module course--add-module" href="/courses/create">
