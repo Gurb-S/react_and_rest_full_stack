@@ -17,7 +17,7 @@ export function CourseDetail(){
     const [ course, setCourse ] = useState([]);
     const [ owner, setOwner ] = useState('');
 
-    const loginedIn = authenticatedUser.firstName + ' ' + authenticatedUser.lastName;
+    const loginedIn = authenticatedUser ? authenticatedUser.firstName + ' ' + authenticatedUser.lastName : null;
     
     //retires the course from the id provided
     useEffect(() => {
