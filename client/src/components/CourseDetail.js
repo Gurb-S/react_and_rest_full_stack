@@ -11,11 +11,13 @@ export function CourseDetail(){
     const navigate = useNavigate();
 
     //import from context Api
-    const { getCourse } = useContext(CourseContext);
+    const { getCourse, authenticatedUser } = useContext(CourseContext);
 
     //States
     const [ course, setCourse ] = useState([]);
     const [ owner, setOwner ] = useState('');
+
+    const loginedIn = authenticatedUser.firstName + ' ' + authenticatedUser.lastName;
     
     //retires the course from the id provided
     useEffect(() => {
@@ -35,11 +37,17 @@ export function CourseDetail(){
     return(
         <main>
             <div className="actions--bar">
+            {loginedIn !== owner ? (                  
+                <div className="wrap">
+                    <a className="button button-secondary" href="/">Return to List</a>
+                </div>
+            ) : (
                 <div className="wrap">
                     <a className="button" href={`/courses/${id}/update`}>Update Course</a>
                     <a className="button" href={`/courses/${id}/delete`}>Delete Course</a>
                     <a className="button button-secondary" href="/">Return to List</a>
                 </div>
+            )}
             </div>
             <div className="wrap">
                 <h2>Course Detail</h2>
@@ -49,7 +57,7 @@ export function CourseDetail(){
                             <h3 className="course--detail--title">Course</h3>
                             <h4 className="course--name">{course.title}</h4>
                             <p>{owner}</p>
-                            <p>{course.description}</p>
+                            <ReactMarkdown>{course.description}</ReactMarkdown>
                         </div>
                         <div>
                             <h3 className="course--detail--title">Estimated Time</h3>
