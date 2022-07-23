@@ -1,15 +1,25 @@
-import React, { useContext } from "react";
-import { Navigate, useParams } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import CourseContext from "../context/Context";
 
 export function DeleteCourse() {
-    const { deleteCourse } = useContext(CourseContext);
+
+    //import from context api
+    const { deleteCourse, userCreds } = useContext(CourseContext);
+
+    //import from router dom
     const { id } = useParams();
-    console.log(id)
-    // // TODO: update id based on course that linked here
-    // TODO: passing in user credentials
-    // TODO: check if users deleting is owner of course
-    deleteCourse(id,'joe@smith.com', 'joepassword');
+    const navigate = useNavigate();
+
+    //deletes course if owner and redirects to forbidden if not owner
+    useEffect(() =>{
+        deleteCourse(id,userCreds.username,userCreds.password)
+        .then(res =>{
+            if(res && res === 403){
+                navigate('/forbidden')
+            }   
+        })
+    },[])
 
     return(
         <Navigate to='/' />
