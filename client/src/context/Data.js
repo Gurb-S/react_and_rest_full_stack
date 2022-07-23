@@ -50,16 +50,12 @@
     export const getAllCourses = async() => {
         const response = await api('/courses', 'GET');
             if (response.status === 200) {
-                console.log('🎆🎆🎆🎆🎆🎆')
-                console.log('IT WORKED!!!!!!!!!!!!!!!!!!!')
                 return response.json().then(data => data);
             }
             else if(response.status === 400){
-                console.log('😢😢😢😢😢')
                 return null;
             }
             else {
-                console.log('🖥🖥🖥🖥🖥🖥🖥🖥🖥')
                 throw new Error();
             }
     }
@@ -80,20 +76,17 @@
     export const createCourse = async(data,username, password) => {
         const response = await api(`/courses`, 'POST', data, true, {username, password});
         if(response.status === 201){
-            return null;
-        }
-        else if(response.status === 400){
-            return response.json().then( data => data)
+            return response.status;
         }
         else{
-            throw new Error();
+            return response.json().then( data => data)
         }
     }
 
     export const updateCourse = async(id,data, username, password) => {
         const response = await api(`/courses/${id}`, 'PUT', data, true, {username, password});
             if(response.status === 204){
-                return 'item added';
+                return response.status;
             }
             else if(response.status === 403){
                 return response.json().then( data => data)
@@ -102,7 +95,6 @@
                 return response.json().then( data => data)
             }
             else {
-                console.log('Did not worklllllllll')
                 throw new Error();
             }
     }

@@ -1,23 +1,19 @@
 import React, { useContext, useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import CourseContext from "../context/Context";
-import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 
 
 export function UpdateCourse () {
 
-    // TODO: update name with name of owner
-
+    //import from router dom
     const { id } = useParams();
     const navigate = useNavigate();
-    const location = useLocation();
-    console.log(location);
-    console.log(navigate);
 
-    const { getCourse, updateCourse, authenticatedUser } = useContext(CourseContext);
-    //const [ course, setCourse ] = useState([]);
+    //import from context Api
+    const { getCourse, updateCourse, authenticatedUser, userCreds } = useContext(CourseContext);
 
+    //States
     const [ title, setTitle ] = useState('');
     const [ description, setDescription ] = useState('');
     const [ estimatedTime, setEstimatedTime ] = useState('');
@@ -25,28 +21,31 @@ export function UpdateCourse () {
     const [ errors, setErrors ] = useState('');    
     const [ owner, setOwner ] = useState('');
     
-    // Notification for signing in
 
-
-
-
+    //displays the info for the course being updated as well if checking if logged in user is the owner
     useEffect(() => {
         const loginedIn = authenticatedUser.firstName + ' ' + authenticatedUser.lastName;
         getCourse(id)
             .then(res => {
-                setTitle(res.course.title);
-                setDescription(res.course.description);
-                setEstimatedTime(res.course.estimatedTime);
-                setMaterialsNeeded(res.course.materialsNeeded);
-                setOwner(res.owner.firstName + ' ' + res.owner.lastName);
-                console.log(loginedIn);
-                if(loginedIn !== res.owner.firstName + ' ' + res.owner.lastName){
-                    navigate(`/courses/${id}`)
+                if(res.course){
+                    setTitle(res.course.title);
+                    setDescription(res.course.description);
+                    setEstimatedTime(res.course.estimatedTime);
+                    setMaterialsNeeded(res.course.materialsNeeded);
+                    setOwner(res.owner.firstName + ' ' + res.owner.lastName);
+                    if(loginedIn !== res.owner.firstName + ' ' + res.owner.lastName){
+                        navigate(`/forbidden`)
+                    }
                 }
+                else{
+                    navigate('/notfound')
+                }
+
             })
-            .catch(err => console.log(err));
+            .catch(err => console.log('📛📛📛📛',err));
     }, [])
 
+    //sends the new course data to the update course function to validate and make changes to the course
     const handleSubmit = (e) => {
         e.preventDefault();
         const data = {
@@ -56,21 +55,16 @@ export function UpdateCourse () {
             estimatedTime,
             materialsNeeded 
         }
-        console.log('you tried!')
-        console.log(data);
-        // TODO: pass in user auth data
-        // TODO: provide error handling for missing info
-        // console.log(userEmail, userPassword)
-        updateCourse(id,data,'joe@smith.com', 'joepassword')
+
+        updateCourse(id,data,userCreds.username, userCreds.password)
             .then(res => {
-                console.log(res)
-                // if(res.message){
-                //     setErrors(res.message);
-                //     toast.error('Course could not be updated')
-                // }
-                // else if(!res.message){
-                //     toast.success('Course has been updated')
-                // }
+                res.errors ? setErrors(res.errors) : setErrors('');
+                if(!title || !description){
+                    toast.error('Course could not be updated');
+                }
+                if(res === 204){
+                    navigate(`/courses/${id}`)
+                }
             })
             .catch(err =>{
                 console.error(err)
@@ -86,6 +80,13 @@ export function UpdateCourse () {
         <main>
             <div className="wrap">
                 <h2>Update Course</h2>
+                { errors && errors.length > 0 ?(
+                    <div className="validation--errors">
+                        <ul>
+                            {errors.map(err => <li>{err}</li>)}
+                        </ul>
+                    </div>
+                ) : <></>}
                 <form onSubmit={handleSubmit}>
                     <div className="main--flex">
                         <div>

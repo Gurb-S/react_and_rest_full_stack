@@ -1,35 +1,36 @@
 import React, { useEffect, useContext, useState } from "react";
-import {  useParams } from "react-router-dom";
+import {  useNavigate, useParams } from "react-router-dom";
 import CourseContext from '../context/Context';
 import ReactMarkdown from 'react-markdown';
 
-/**
- * // * The materials needed are currently all on once list element 
- * // TODO: display materials needed as individual items
- * // TODO: remove extra console logs and remove extra comments
- * TODO: update name with name of owner
- * TODO: only allow access to update and delete if owner of course
- */
 
 export function CourseDetail(){
 
+    //import from router dom
     const { id } = useParams();
+    const navigate = useNavigate();
+
+    //import from context Api
     const { getCourse } = useContext(CourseContext);
 
+    //States
     const [ course, setCourse ] = useState([]);
     const [ owner, setOwner ] = useState('');
     
-
+    //retires the course from the id provided
     useEffect(() => {
         getCourse(id)
             .then(res => { 
-                setCourse(res.course)
-                setOwner(res.owner.firstName + ' ' + res.owner.lastName);
+                if(res.message){
+                    navigate('/notfound')
+                }
+                else{
+                    setOwner(res.owner.firstName + ' ' + res.owner.lastName);
+                    setCourse(res.course)
+                }
             })
-            .catch(err => console.log(err));
+            .catch(err => console.log('There is an issue', err));
     }, [])
-
-    //toast.error('You are not the owner of this course')
 
     return(
         <main>

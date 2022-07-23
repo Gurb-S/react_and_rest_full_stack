@@ -5,11 +5,11 @@ import { toast, ToastContainer } from "react-toastify";
 
 
 export function CreateCourse() {
-    // TODO: update name with name of person creating course
-    // TODO: provide userid of user logined
 
-    const { authenticatedUser, createCourse } = useContext(CourseContext);
+    //imports from context Api
+    const { authenticatedUser, createCourse, userCreds } = useContext(CourseContext);
 
+    //import from react router dom
     const navigate = useNavigate();
 
     //States
@@ -19,6 +19,7 @@ export function CreateCourse() {
     const [ materialsNeeded, setMaterialsNeeded ] = useState('');
     const [ errors, setErrors ] = useState('');
 
+    //handles the creation of new courses by passing data into the createCourse function
     const handleSubmit = (e) => {
         e.preventDefault();
         const data = {
@@ -26,19 +27,16 @@ export function CreateCourse() {
             description,
             estimatedTime,
             materialsNeeded,
-            userId: 1
+            userId: authenticatedUser.userId
         }
-        // TODO: add auth for of user logged
-        // TODO: error shows even when course created successfully
-        createCourse(data, 'joe@smith.com', 'joepassword')
+
+        createCourse(data, userCreds.username, userCreds.password)
             .then(res => { 
-                console.log(res.errors)
-                setErrors(res.errors)
-                if(errors.length > 0){
+                res.errors ? setErrors(res.errors) : setErrors('');
+                if(!title || !description){
                     toast.error('Course could not be created');
                 }
-                else if(errors.length === 0){
-                    toast.success('Course was successfully created');
+                if(res === 201){
                     navigate('/')
                 }
             })
@@ -57,7 +55,7 @@ export function CreateCourse() {
         <main>
             <div className="wrap">
                 <h2>Create Course</h2>
-                { errors.length > 0 ?(
+                { errors && errors.length > 0 ?(
                     <div className="validation--errors">
                         <ul>
                             {errors.map(err => <li>{err}</li>)}

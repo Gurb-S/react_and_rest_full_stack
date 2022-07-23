@@ -6,44 +6,44 @@ import { getAllCourses, getCourse, getUser, updateCourse, createUser, createCour
 export const CourseContext = React.createContext();
 
 export function CourseProvider({ children }) {
-    // const value = {
-    //     actions: {
-    //         getAllCourses: getAllCourses
-    //     }
-    // }
 
+    //Set cookies
     const authCookie = Cookies.get('authenticatedUser');
+    const userCookie = Cookies.get('userCreds')
 
+    //Set states
     const [ authenticatedUser, setAuthenticatedUser ] = useState(() => ( authCookie ? JSON.parse(authCookie) : null));
+    const [ userCreds, setUserCreds ] = useState(() => (userCookie ? JSON.parse(userCookie) : null))
 
-    // User Credentials
-
-
+    //sign in authentication that sets the cookies
     const signInAuth = async(username, password) => {
-      console.log(username);
-      console.log(password);
+      const creds = { username, password }
       const user = await getUser(username,password);
       if(user !== null){
-        console.log(JSON.stringify(user))
         setAuthenticatedUser(user)
+        setUserCreds(creds)
         const cookieOptions = {
           expires: 1, //1 day
           secure: true,  
           sameSite: "None"
         };
         Cookies.set('authenticatedUser', JSON.stringify(user), cookieOptions);
+        Cookies.set('userCreds', JSON.stringify(creds), cookieOptions);
       }
       return user;
     }
 
+    //sign out function that removies cookies and resets states
     const signOut = async() => {
       setAuthenticatedUser(null);
+      setUserCreds(null);
       Cookies.remove('authenticatedUser');
+      Cookies.remove('userCreds');
     }
 
-
+    //context provider that provides all the functions
     return(
-        <CourseContext.Provider value={{ getAllCourses, getCourse, signInAuth, signOut, updateCourse, authenticatedUser, createUser, createCourse, deleteCourse }}>
+        <CourseContext.Provider value={{ getAllCourses, getCourse, signInAuth, signOut, updateCourse, authenticatedUser, createUser, createCourse, deleteCourse, userCreds }}>
             {children}
         </CourseContext.Provider>
     )
@@ -52,21 +52,3 @@ export function CourseProvider({ children }) {
 }
 
 export default CourseContext;
-
-/**
- * A higher-order component that wraps the provided component in a Context Consumer component.
- * @param {class} Component - A React component.
- * @returns {function} A higher-order component.
- */
-
-//  export function withContext(Component) {
-//     return function ContextComponent(props) {
-//       return (
-//         <CourseContext>
-//           {context => <Component {...props} context={context} />}
-//         </CourseContext>
-//       );
-//     }
-//   }
-  
-  //export default {withContext, Context}
