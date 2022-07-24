@@ -48,11 +48,29 @@ header li {
 }
 header nav a {
     color: #fff;
+    border:none;
+    position: relative;
 }
 header nav a:hover {
-    border-bottom: white solid;
     color: #fff;
+    border: none;
 }
+
+header nav a::after{
+    content: '';
+    position: absolute;
+    width: 0px;
+    height: 2px;
+    left: 50%;
+    bottom: 0;
+    background-color: white;
+    transition: all ease-in-out .3s;
+}
+
+header nav a:hover::after{
+    width: 100%;
+    left: 0;
+  }
 
 .header--signedin li {
     text-align: right;
