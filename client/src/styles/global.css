@@ -20,7 +20,7 @@ p {
     hyphens: auto;
 }
 a {
-    color: #939;
+    color: #fff;
     text-decoration: none;
 }
 .wrap {
@@ -70,7 +70,7 @@ header nav a::after{
 header nav a:hover::after{
     width: 100%;
     left: 0;
-  }
+}
 
 .header--signedin li {
     text-align: right;
@@ -81,7 +81,7 @@ header nav a:hover::after{
     margin-left: .5rem;
 }
 .course--module {
-    background: #7c689b;
+    background: #201d1dd6;
     border-radius: .5rem;
     padding: 1.5rem;
     margin-bottom: 1.5rem;
@@ -105,17 +105,17 @@ header nav a:hover::after{
     font-size: 1.25rem;
 }
 .course--add--title .add {
-    width: 20px;
+    width: 30px;
     height: auto;
     margin-right: 5px;
-    fill: #57496e;
+    fill: #fff;
 }
 .course--detail--title {
     padding-bottom: .25rem;
     border-bottom: 1px solid #888;
     margin: 3rem 0 .5rem;
     font-size: .9rem;
-    color: #555;
+    color: rgb(0, 0, 0);
     text-transform: uppercase;
     letter-spacing: 2px;
 }
@@ -123,7 +123,7 @@ header nav a:hover::after{
     font-size: 2rem;
     margin-bottom: .5rem;
     font-weight: 700;
-    color: #47395e;
+    color: #000000ba;
 }
 .course--detail--list {
     font-weight: 300;
@@ -131,7 +131,7 @@ header nav a:hover::after{
     line-height: 1.5;
 }
 .actions--bar {
-    background: #e9e5f0;
+    background: #6d6d6d;
     padding: 1rem 0;
     margin: -2rem 0 2rem;
 }
@@ -187,6 +187,8 @@ input, textarea {
 textarea {
     min-height: 300px;
 }
+
+
 .button {
     background: #7c689b;
     color: #fff;
@@ -201,6 +203,10 @@ textarea {
     font-weight: bold;
     transition: background 0.2s;
 }
+
+/* .button a {
+    background: #fff;
+} */
 .button:last-child {
     margin-bottom: 0;
 }
@@ -209,14 +215,14 @@ textarea {
     cursor: pointer;
 }
 .button-secondary {
-    color: #7c689b;
+    color: #000000ba;
     background: none;
-    box-shadow: 0 0 0 2px #7c689b inset;
+    box-shadow: 0 0 0 2px #000000ba inset;
     transition: box-shadow 0.2s, color 0.2s;
 }
 .button-secondary:hover {
-    color: #63537d;
-    box-shadow: 0 0 0 2px #63537d inset;
+    color: white;
+    box-shadow: 0 0 0 2px white inset;
     cursor: pointer;
 }
 input:focus, button:focus, .button:focus, textarea:focus {
