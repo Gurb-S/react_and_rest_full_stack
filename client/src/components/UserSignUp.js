@@ -31,10 +31,10 @@ export function UserSignUp () {
         createUser(user)
             .then((res) => {
                 setErrors(res);
-                if(errors.length > 0){
+                if(!firstName || !lastName || !emailAddress || !password){
                     toast.error('Acount could not be created')
                 }
-                else if(errors.length === 0){
+                else if(res === 201){
                     toast.success('Account successfully created')
                     signInAuth(emailAddress, password);
                     navigate('/')
@@ -55,7 +55,7 @@ export function UserSignUp () {
         <main>
             <div className="form--centered">
                 <h2>Sign Up</h2>
-                { errors.length > 0 ? <ul className="validation--errors">{errors.map( err => <li className="validation--errors">{err}</li>)}</ul> : <></>}
+                { errors && errors.length > 0 ? <ul className="validation--errors">{errors.map( err => <li className="validation--errors">{err}</li>)}</ul> : <></>}
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="firstName">First Name</label>
                     <input id="firstName" name="firstName" type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)}></input>
