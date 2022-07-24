@@ -56,7 +56,7 @@ export function CourseDetail(){
                         <div>
                             <h3 className="course--detail--title">Course</h3>
                             <h4 className="course--name">{course.title}</h4>
-                            <p>{owner}</p>
+                            <p>By {owner}</p>
                             <ReactMarkdown>{course.description}</ReactMarkdown>
                         </div>
                         <div>
