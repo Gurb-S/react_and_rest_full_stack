@@ -29,7 +29,7 @@ a {
     padding: 0 1rem;
 }
 header {
-    background: #57496e;
+    background: #201d1dec;
     color: #fff;
     padding: 1rem 0;
     margin-bottom: 2rem;
@@ -47,9 +47,10 @@ header li {
     font-size: .8rem;
 }
 header nav a {
-    color: #dbd;
+    color: #fff;
 }
 header nav a:hover {
+    border-bottom: white solid;
     color: #fff;
 }
 
