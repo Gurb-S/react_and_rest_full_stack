@@ -190,7 +190,7 @@ textarea {
 
 
 .button {
-    background: #7c689b;
+    background: #00000075;
     color: #fff;
     font-size: 1rem;
     padding: .75rem 1.5rem;
@@ -204,14 +204,11 @@ textarea {
     transition: background 0.2s;
 }
 
-/* .button a {
-    background: #fff;
-} */
 .button:last-child {
     margin-bottom: 0;
 }
 .button:not(.button-secondary):hover {
-    background: #63537d;
+    background: #000000ba;
     cursor: pointer;
 }
 .button-secondary {
@@ -225,6 +222,16 @@ textarea {
     box-shadow: 0 0 0 2px white inset;
     cursor: pointer;
 }
+
+.sign {
+    background: #000000a2;
+    transition: background 0.2s;
+}
+
+.cancel:hover {
+    background-color: #000000ba;
+}
+
 input:focus, button:focus, .button:focus, textarea:focus {
     border: none;
     border-radius: 0;
