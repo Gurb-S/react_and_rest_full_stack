@@ -18,7 +18,6 @@ import { PrivateRoute } from './context/PrivateRoute';
 import { UpdateCourse } from './components/UpdateCourse';
 import { UserSignUp } from './components/UserSignUp';
 import { CreateCourse } from './components/CreateCourse';
-import { DeleteCourse } from './components/DeleteCourse';
 import { NotFound } from './components/NotFound';
 import { Forbidden } from './components/Forbidden';
 import { UnhandledError } from './components/UnhandlerError';
@@ -33,7 +32,6 @@ function App() {
             <Route path='/courses/:id' element={<CourseDetail />} />
             <Route path='/courses/:id/update' element={<PrivateRoute><UpdateCourse /></PrivateRoute>} />
             <Route path='/courses/create' element={<PrivateRoute><CreateCourse /></PrivateRoute>} />
-            <Route path='/courses/:id/delete' element={<PrivateRoute><DeleteCourse /></PrivateRoute>}/>
             <Route path='/signin' element={<UserSignIn />} />
             <Route path='/signout' element={<UserSignOut />} />
             <Route path='/signup' element={<UserSignUp />}/>

@@ -1,5 +1,5 @@
 import React, { useEffect, useContext, useState } from "react";
-import {  useNavigate, useParams } from "react-router-dom";
+import {  Link, useNavigate, useParams } from "react-router-dom";
 import CourseContext from '../context/Context';
 import ReactMarkdown from 'react-markdown';
 
@@ -11,7 +11,7 @@ export function CourseDetail(){
     const navigate = useNavigate();
 
     //import from context Api
-    const { getCourse, authenticatedUser } = useContext(CourseContext);
+    const { getCourse, authenticatedUser,deleteCourse, userCreds } = useContext(CourseContext);
 
     //States
     const [ course, setCourse ] = useState([]);
@@ -34,6 +34,20 @@ export function CourseDetail(){
             .catch(err => console.log('There is an issue', err));
     }, [])
 
+    const deletesCourse = () => {
+        console.log(userCreds.username)
+        deleteCourse(id,userCreds.username,userCreds.password)
+            .then(res =>{
+                console.log(res)
+                if(res && res === 403){
+                    navigate('/forbidden')
+                }   
+            })
+            .catch(err =>{
+                console.log('📛📛📛📛', err)
+            })
+    }
+
     return(
         <main>
             <div className="actions--bar">
@@ -44,7 +58,7 @@ export function CourseDetail(){
             ) : (
                 <div className="wrap">
                     <a className="button" href={`/courses/${id}/update`}>Update Course</a>
-                    <a className="button" href={`/courses/${id}/delete`}>Delete Course</a>
+                    <Link to={`/`} className="button"><span onClick={deletesCourse}>Delete Course</span></Link>
                     <a className="button button-secondary" href="/">Return to List</a>
                 </div>
             )}
