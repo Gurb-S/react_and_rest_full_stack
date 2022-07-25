@@ -232,6 +232,10 @@ textarea {
     background-color: #000000ba;
 }
 
+.link {
+    color: rgb(255, 8, 0);
+}
+
 input:focus, button:focus, .button:focus, textarea:focus {
     border: none;
     border-radius: 0;
