@@ -76,8 +76,8 @@ export function UserSignIn(){
                     <input id="emailAddress" name="emailAddress" type="email" ref={emailRef} required></input>
                     <label htmlFor="password">Password</label>
                     <input id="password" name="password" type="password" ref={passwordRef} required></input>
-                    <button className="button" type="submit" onClick={notify}>Sign In</button>
-                    <button className="button button-secondary" onClick={cancelHandler}>Cancel</button>
+                    <button className="button sign" type="submit" onClick={notify}>Sign In</button>
+                    <button className="button button-secondary cancel" onClick={cancelHandler}>Cancel</button>
                 </form>
                 <p>
                     Don't have a user account? <Link to="/signup">Click here to sign up</Link>
