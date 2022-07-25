@@ -105,8 +105,8 @@ export function UpdateCourse () {
                             </textarea>
                         </div>
                     </div>
-                    <button className="button" type="submit">Update Course</button>
-                    <button className="button button-secondary" onClick={cancelHandler}>Cancel</button>
+                    <button className="button sign" type="submit">Update Course</button>
+                    <button className="button button-secondary cancel" onClick={cancelHandler}>Cancel</button>
                 </form>
             </div>
             <ToastContainer />

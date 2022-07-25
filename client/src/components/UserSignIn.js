@@ -80,7 +80,7 @@ export function UserSignIn(){
                     <button className="button button-secondary cancel" onClick={cancelHandler}>Cancel</button>
                 </form>
                 <p>
-                    Don't have a user account? <Link to="/signup">Click here to sign up</Link>
+                    Don't have a user account? <Link to="/signup" className="link">Click here to sign up</Link>
                 </p>
             </div>
             <ToastContainer />
