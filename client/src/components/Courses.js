@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CourseContext from "../context/Context";
 
 export function Courses(){
@@ -7,15 +7,24 @@ export function Courses(){
     //import from context api
     const { getAllCourses } = useContext(CourseContext);
 
+    const navigate = useNavigate();
+
     //states
     const [courses, setCourses] = useState([]);
 
     useEffect(() =>{
         getAllCourses()
             .then( res => {
+                console.log(res)
+                if(res === 500){
+                    navigate('/error')
+                }
                 setCourses(res.courses)
             })
-            .catch(err => console.log(err));
+            .catch(err => {
+                console.log('📛📛📛📛',err)
+                navigate('/error')
+            });
     }, [])
 
     return(

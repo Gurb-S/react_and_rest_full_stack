@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useState } from "react";
-import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import CourseContext from "../context/Context";
 import { toast, ToastContainer } from 'react-toastify';
 

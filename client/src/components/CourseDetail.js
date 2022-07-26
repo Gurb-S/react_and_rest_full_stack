@@ -26,12 +26,18 @@ export function CourseDetail(){
                 if(res.message){
                     navigate('/notfound')
                 }
+                else if(res === 500){
+                    navigate('/error')
+                }
                 else{
                     setOwner(res.owner.firstName + ' ' + res.owner.lastName);
                     setCourse(res.course)
                 }
             })
-            .catch(err => console.log('There is an issue', err));
+            .catch(err => {
+                navigate('/error')
+                console.log('There is an issue', err)
+            });
     }, [])
 
     const deletesCourse = () => {

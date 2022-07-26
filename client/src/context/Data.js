@@ -55,6 +55,9 @@ export const getAllCourses = async() => {
         else if(response.status === 400){
             return null;
         }
+        else if(response.status === 500){
+            return response.status;
+        }
         else {
             throw new Error();
         }
@@ -67,6 +70,9 @@ export const getCourse = async(id) => {
         }
         else if(response.status === 400){
             return null;
+        }
+        else if(response.status === 500){
+            return response.status;
         }
         else {
             throw new Error();
