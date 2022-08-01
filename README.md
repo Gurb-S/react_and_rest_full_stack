@@ -17,7 +17,7 @@ Step 2: `npm install`
 
 Step 3: `npm start`
 
-This runs the app in the development mode and automatically opens http://localhost:3000 in your browser to start the frontend
+This runs the app in the development mode and automatically opens http://localhost:3000 in your default browser
 
 ### Backend
 
